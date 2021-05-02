@@ -22,6 +22,8 @@ public class Estudiante implements Serializable {
 
 	private String apellido2;
 
+	private String colorPreferido;
+
 	private String direccion;
 
 	private String dni;
@@ -35,17 +37,26 @@ public class Estudiante implements Serializable {
 
 	private String telefono;
 
-	//bi-directional many-to-one association to ValoracionMateria
-	@OneToMany(mappedBy="estudiante")
-	private List<ValoracionMateria> valoracionmaterias;
-
 	//bi-directional many-to-one association to Tipologiasexo
 	@ManyToOne
 	@JoinColumn(name="idTipologiaSexo")
 	private Tipologiasexo tipologiasexo;
 
+	//bi-directional many-to-one association to ValoracionMateria
+	@OneToMany(mappedBy="estudiante")
+	private List<ValoracionMateria> valoracionmaterias;
+
 	public Estudiante() {
 	}
+
+	
+	
+	@Override
+	public String toString() {
+		return nombre + " " + apellido1 + " " + apellido2;
+	}
+
+
 
 	public int getId() {
 		return this.id;
@@ -69,6 +80,14 @@ public class Estudiante implements Serializable {
 
 	public void setApellido2(String apellido2) {
 		this.apellido2 = apellido2;
+	}
+
+	public String getColorPreferido() {
+		return this.colorPreferido;
+	}
+
+	public void setColorPreferido(String colorPreferido) {
+		this.colorPreferido = colorPreferido;
 	}
 
 	public String getDireccion() {
@@ -119,6 +138,14 @@ public class Estudiante implements Serializable {
 		this.telefono = telefono;
 	}
 
+	public Tipologiasexo getTipologiasexo() {
+		return this.tipologiasexo;
+	}
+
+	public void setTipologiasexo(Tipologiasexo tipologiasexo) {
+		this.tipologiasexo = tipologiasexo;
+	}
+
 	public List<ValoracionMateria> getValoracionmaterias() {
 		return this.valoracionmaterias;
 	}
@@ -139,14 +166,6 @@ public class Estudiante implements Serializable {
 		valoracionmateria.setEstudiante(null);
 
 		return valoracionmateria;
-	}
-
-	public Tipologiasexo getTipologiasexo() {
-		return this.tipologiasexo;
-	}
-
-	public void setTipologiasexo(Tipologiasexo tipologiasexo) {
-		this.tipologiasexo = tipologiasexo;
 	}
 
 }

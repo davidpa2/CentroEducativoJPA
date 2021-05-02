@@ -135,6 +135,7 @@ public class PanelProfesores extends JPanel {
 			panelDatos.setApellido1(this.actual.getApellido1());
 			panelDatos.setApellido2(this.actual.getApellido2());
 			
+			//Hay que recorrer los elementos del JComboBox de sexo para saber cual está seleccionado
 			for (int i = 0; i < this.panelDatos.getJcbSexo().getItemCount(); i++) {		
 				if (this.actual.getTipologiasexo().getId() == panelDatos.getJcbSexo().getItemAt(i).getId()) {
 					this.panelDatos.getJcbSexo().setSelectedIndex(i);
@@ -145,11 +146,13 @@ public class PanelProfesores extends JPanel {
 			panelDatos.setDireccion(this.actual.getDireccion());
 			panelDatos.setEmail(this.actual.getEmail());
 			panelDatos.setTelefono(this.actual.getTelefono());
+			panelDatos.setImagen(this.actual.getImagen());
+			panelDatos.setColor(this.actual.getColorPreferido());
 		}
 	}
 	
 	/**
-	 * 
+	 * Método utilizado para almacenar los datos que hay en pantalla
 	 */
 	private void cargarActualDesdePantalla() {
 		this.actual.setNombre(panelDatos.getNombre());
@@ -179,7 +182,7 @@ public class PanelProfesores extends JPanel {
 	}
 	
 	/**
-	 * Método utilizado para vaciar los campos de los JTextField para poder añadir uno nuevo
+	 * Método utilizado para vaciar los campos de los JTextField para poder añadir un registro nuevo
 	 */
 	private void vaciarCampos() {
 		this.actual = new Profesor();
@@ -190,6 +193,7 @@ public class PanelProfesores extends JPanel {
 		this.panelDatos.setDireccion("");
 		this.panelDatos.setEmail("");
 		this.panelDatos.setTelefono("");
+		this.panelDatos.setImagen(null);
 	}
 	
 	/**

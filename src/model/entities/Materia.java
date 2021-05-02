@@ -32,6 +32,15 @@ public class Materia implements Serializable {
 
 	public Materia() {
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return nombre;
+	}
+
+
 
 	public int getId() {
 		return this.id;

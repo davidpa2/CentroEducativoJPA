@@ -26,19 +26,15 @@ public class Tipologiasexo implements Serializable {
 
 	//bi-directional many-to-one association to Profesor
 	@OneToMany(mappedBy="tipologiasexo")
-	private List<Profesor> profesor;
+	private List<Profesor> profesors;
 
 	public Tipologiasexo() {
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return descripcion;
 	}
-
-
 
 	public int getId() {
 		return this.id;
@@ -78,23 +74,23 @@ public class Tipologiasexo implements Serializable {
 		return estudiante;
 	}
 
-	public List<Profesor> getProfesor() {
-		return this.profesor;
+	public List<Profesor> getProfesors() {
+		return this.profesors;
 	}
 
-	public void setProfesor(List<Profesor> profesor) {
-		this.profesor = profesor;
+	public void setProfesors(List<Profesor> profesors) {
+		this.profesors = profesors;
 	}
 
 	public Profesor addProfesor(Profesor profesor) {
-		getProfesor().add(profesor);
+		getProfesors().add(profesor);
 		profesor.setTipologiasexo(this);
 
 		return profesor;
 	}
 
 	public Profesor removeProfesor(Profesor profesor) {
-		getProfesor().remove(profesor);
+		getProfesors().remove(profesor);
 		profesor.setTipologiasexo(null);
 
 		return profesor;

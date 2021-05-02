@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import model.entities.Estudiante;
 
 public class ControladorEstudiante {
-	//Declaración de la instacia como null para crear un Singleton
+		//Declaración de la instacia como null para crear un Singleton
 		private static ControladorEstudiante instance = null;
 		
 		private EntityManagerFactory factory = Persistence.createEntityManagerFactory("CentroEducativoJPA");
@@ -27,9 +27,17 @@ public class ControladorEstudiante {
 			return instance;
 		}	
 		
+		/**
+		 * Constructor por defecto
+		 */
 		public ControladorEstudiante() {
 		}
 		
+		/**
+		 * 
+		 * @param id
+		 * @return
+		 */
 		public Estudiante find(int id) {
 			Estudiante f = null;
 			EntityManager em = factory.createEntityManager();
@@ -39,7 +47,7 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * Método utilizado para buscar el primer registro de la tabla fabricante
+		 * Método utilizado para buscar el primer registro de la tabla Estudiante
 		 * @return
 		 */
 		public Estudiante findPrimero() {
@@ -53,11 +61,11 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * Método utilizado para encontrar el último registro de la tabla fabricante
+		 * Método utilizado para encontrar el último registro de la tabla Estudiante
 		 * @return
 		 */
 		public Estudiante findUltimo() {
-			//En principio inicializar un objeto de tipo Fabricante a null
+			//En principio inicializar un objeto de tipo Estudiante a null
 			Estudiante c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.estudiante order by id desc limit 1",Estudiante.class);
@@ -67,13 +75,13 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * Método utilizado para encontrar un siguiente cliente
+		 * Método utilizado para encontrar un siguiente Estudiante
 		 * @param idActualidActual Es necesario pasarle cual es el registro en el que ya se está para poder
 		 * 		determinar cuál es el anterior
 		 * @return
 		 */
 		public Estudiante findSiguiente(int idActual) {
-			//En principio inicializar un objeto de tipo cliente a null
+			//En principio inicializar un objeto de tipo Estudiante a null
 			Estudiante c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.estudiante where id > ? order by id limit 1",Estudiante.class);
@@ -85,13 +93,13 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * Método utilizado para encontrar un anterior cliente
+		 * Método utilizado para encontrar un anterior Estudiante
 		 * @param idActual Es necesario pasarle cual es el registro en el que ya se está para poder
 		 * 		determinar cuál es el anterior
 		 * @return
 		 */
 		public Estudiante findAnterior(int idActual) {
-			//En principio inicializar un objeto de tipo Cliente a null
+			//En principio inicializar un objeto de tipo Estudiante a null
 			Estudiante c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.estudiante where id < ? order by id desc limit 1",Estudiante.class);
@@ -103,7 +111,7 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * 
+		 * Método guardar, para introducir un registro en la tabla Estudiante
 		 * @param f
 		 * @return
 		 */
@@ -111,9 +119,11 @@ public class ControladorEstudiante {
 			try {
 				EntityManager em = factory.createEntityManager();
 				em.getTransaction().begin();
+				//Si la id el nuevo registro es 0, se crea uno nuevo
 				if (c.getId() == 0) {
 					em.persist(c);
 				}
+				//Sino, se modifica
 				else {
 					em.merge(c);
 				}
@@ -128,7 +138,7 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * 
+		 * Borrar un registro de la tabla Estudiante
 		 * @param id
 		 * @return
 		 */
@@ -142,7 +152,7 @@ public class ControladorEstudiante {
 		}
 		
 		/**
-		 * Método utilizado para buscar todos los campos de TipologiaSexo
+		 * Método utilizado para buscar todos los campos de Estudiante
 		 * @return
 		 */
 		public List<Estudiante> findAll () {

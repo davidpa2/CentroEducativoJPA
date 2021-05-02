@@ -5,8 +5,14 @@ import java.awt.MenuBar;
 
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class VentanaPrincipal extends JFrame {
+	
+	static {
+		setApariencia(); //Por estética, pondremos en la ventana la apariencia de Windows
+	}
 
 	private JTabbedPane jTabbedPane = null;
 	private static VentanaPrincipal instance = null;
@@ -23,7 +29,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	/**
-	 * 
+	 * Constructor de Ventana Principal, a partir de aquí se ejecuta todo el programa
 	 */
 	public VentanaPrincipal() {
 		super("Gestion Centro Educativo"); //Asignar el nombre de la ventana pasándole al JFrame un String
@@ -45,7 +51,7 @@ public class VentanaPrincipal extends JFrame {
 		//Añadir los distintos paneles
 		jTabbedPane.add("Estudiantes", new PanelEstudiantes());
 		jTabbedPane.add("Profesores",new PanelProfesores());
-		//jTabbedPane.add("",new ());
+		jTabbedPane.add("Valoracion Estudiantes",new PanelValoracionEstudiantes());
 		//jTabbedPane.add("",new ());
 		//jTabbedPane.add("",new ());
 		
@@ -64,6 +70,7 @@ public class VentanaPrincipal extends JFrame {
 	public static void main(String[] args) {
 		VentanaPrincipal.getInstance().setVisible(true);
 		
+		//Primera consulta para comprobar que se ha establecido la conexión con la BBDD
 		/*EntityManagerFactory factory = Persistence.createEntityManagerFactory("CentroEducativoJPA");
 		EntityManager em = factory.createEntityManager();
 		
@@ -74,4 +81,24 @@ public class VentanaPrincipal extends JFrame {
 		*/
 	}
 
+	/**
+	 * Método que incorpora la apariencia de las interfaces gráficas de Windows
+	 */
+	public static void setApariencia() {
+		try {
+			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 }

@@ -6,7 +6,6 @@ import javax.swing.JToolBar;
 import model.controllers.ControladorEstudiante;
 import model.entities.Estudiante;
 import model.entities.Tipologiasexo;
-
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -117,6 +116,7 @@ public class PanelEstudiantes extends JPanel {
 		btnEliminar.setIcon(new ImageIcon(PanelEstudiantes.class.getResource("/images/eliminar.png")));
 		toolBar.add(btnEliminar);
 		
+		//De primeras buscar el primer registro y mostrarlo en pantalla
 		this.actual = ControladorEstudiante.getInstance().findPrimero();
 		cargarActualEnPantalla();
 	}
@@ -131,6 +131,7 @@ public class PanelEstudiantes extends JPanel {
 			panelDatos.setApellido1(this.actual.getApellido1());
 			panelDatos.setApellido2(this.actual.getApellido2());
 			
+			//Hay que recorrer los elementos del JComboBox de sexo para saber cual está seleccionado
 			for (int i = 0; i < this.panelDatos.getJcbSexo().getItemCount(); i++) {		
 				if (this.actual.getTipologiasexo().getId() == panelDatos.getJcbSexo().getItemAt(i).getId()) {
 					this.panelDatos.getJcbSexo().setSelectedIndex(i);
@@ -141,11 +142,13 @@ public class PanelEstudiantes extends JPanel {
 			panelDatos.setDireccion(this.actual.getDireccion());
 			panelDatos.setEmail(this.actual.getEmail());
 			panelDatos.setTelefono(this.actual.getTelefono());
+			panelDatos.setImagen(this.actual.getImagen());
+			panelDatos.setColor(this.actual.getColorPreferido());
 		}
 	}
 	
 	/**
-	 * 
+	 * Método utilizado para almacenar los datos que hay en pantalla
 	 */
 	private void cargarActualDesdePantalla() {
 		this.actual.setNombre(panelDatos.getNombre());
@@ -158,6 +161,8 @@ public class PanelEstudiantes extends JPanel {
 		this.actual.setDireccion(panelDatos.getDireccion());
 		this.actual.setEmail(panelDatos.getEmail());
 		this.actual.setTelefono(panelDatos.getTelefono());
+		this.actual.setImagen(panelDatos.getImagen());
+		this.actual.setColorPreferido(panelDatos.getColor());
 	}
 
 	/**
@@ -177,7 +182,7 @@ public class PanelEstudiantes extends JPanel {
 	}
 	
 	/**
-	 * Método utilizado para vaciar los campos de los JTextField para poder añadir uno nuevo
+	 * Método utilizado para vaciar los campos de los JTextField para poder añadir un registro nuevo
 	 */
 	private void vaciarCampos() {
 		this.actual = new Estudiante();
@@ -188,6 +193,7 @@ public class PanelEstudiantes extends JPanel {
 		this.panelDatos.setDireccion("");
 		this.panelDatos.setEmail("");
 		this.panelDatos.setTelefono("");
+		this.panelDatos.setImagen(null);
 	}
 	
 	/**
@@ -205,4 +211,5 @@ public class PanelEstudiantes extends JPanel {
 	    	JOptionPane.showMessageDialog(null, "Eliminado correctamente");
 	    }
 	}
+	
 }

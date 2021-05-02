@@ -39,7 +39,7 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * Método utilizado para buscar el primer registro de la tabla fabricante
+		 * Método utilizado para buscar el primer registro de la tabla profesor
 		 * @return
 		 */
 		public Profesor findPrimero() {
@@ -53,11 +53,11 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * Método utilizado para encontrar el último registro de la tabla fabricante
+		 * Método utilizado para encontrar el último registro de la tabla profesor
 		 * @return
 		 */
 		public Profesor findUltimo() {
-			//En principio inicializar un objeto de tipo Fabricante a null
+			//En principio inicializar un objeto de tipo Profesor a null
 			Profesor c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.profesor order by id desc limit 1",Profesor.class);
@@ -67,13 +67,13 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * Método utilizado para encontrar un siguiente cliente
+		 * Método utilizado para encontrar un siguiente profesor
 		 * @param idActualidActual Es necesario pasarle cual es el registro en el que ya se está para poder
 		 * 		determinar cuál es el anterior
 		 * @return
 		 */
 		public Profesor findSiguiente(int idActual) {
-			//En principio inicializar un objeto de tipo cliente a null
+			//En principio inicializar un objeto de tipo profesor a null
 			Profesor c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.profesor where id > ? order by id limit 1",Profesor.class);
@@ -85,13 +85,13 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * Método utilizado para encontrar un anterior cliente
+		 * Método utilizado para encontrar un anterior profesor
 		 * @param idActual Es necesario pasarle cual es el registro en el que ya se está para poder
 		 * 		determinar cuál es el anterior
 		 * @return
 		 */
 		public Profesor findAnterior(int idActual) {
-			//En principio inicializar un objeto de tipo Cliente a null
+			//En principio inicializar un objeto de tipo Profesor a null
 			Profesor c = null;
 			EntityManager em = factory.createEntityManager();
 			Query q = em.createNativeQuery("select * from centroeducativo.profesor where id < ? order by id desc limit 1",Profesor.class);
@@ -103,7 +103,7 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * 
+		 * Guardar un profesor, ya sea uno nuevo o modificarlo
 		 * @param f
 		 * @return
 		 */
@@ -111,9 +111,11 @@ public class ControladorProfesor {
 			try {
 				EntityManager em = factory.createEntityManager();
 				em.getTransaction().begin();
+				//Si la id del nuevo registro es 0, se crea uno nuevo
 				if (c.getId() == 0) {
 					em.persist(c);
 				}
+				//Si no, se modifica uno existente
 				else {
 					em.merge(c);
 				}
@@ -128,7 +130,7 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * 
+		 * Borrar un registro de la BBDD
 		 * @param id
 		 * @return
 		 */
@@ -142,7 +144,7 @@ public class ControladorProfesor {
 		}
 		
 		/**
-		 * Método utilizado para buscar todos los fabricantes
+		 * Método utilizado para buscar todos los profesores
 		 * @return
 		 */
 		public List<Profesor> findAll () {
