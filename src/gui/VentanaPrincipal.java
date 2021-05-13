@@ -52,7 +52,7 @@ public class VentanaPrincipal extends JFrame {
 		jTabbedPane.add("Estudiantes", new PanelEstudiantes());
 		jTabbedPane.add("Profesores",new PanelProfesores());
 		jTabbedPane.add("Valoracion Estudiantes",new PanelValoracionEstudiantes());
-		//jTabbedPane.add("",new ());
+		jTabbedPane.add("Valoracion Estudiantes II",new Panel2ValoracionEstudiantes());
 		//jTabbedPane.add("",new ());
 		
 		return jTabbedPane;

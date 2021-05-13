@@ -121,5 +121,52 @@ public class ControladorValoracionEstudiante {
 		}
 		
 	}
+	
+	
+	/**
+	 * Buscar los registros introducidos en valoracionmateria según el profesor, estudiante y materia
+	 * que se pasen como parámetros
+	 * @param prof
+	 * @param mat
+	 * @param nota
+	 * @return
+	 */
+	public List<Estudiante> findValoracionMateria (Materia mat, Profesor prof, int nota) {
+
+		EntityManager em = factory.createEntityManager();
+		Query q = em.createNativeQuery("SELECT * from centroeducativo.estudiante e where e.id in(SELECT idEstudiante FROM centroeducativo.valoracionmateria where idProfesor = ? and idMateria = ? and valoracion = ?);", Estudiante.class);
+		//Añadir los parámetros a la consulta
+		q.setParameter(1, prof.getId());
+		q.setParameter(2, mat.getId());
+		q.setParameter(3, nota);
+		//Guardar los registros en una lista
+		List<Estudiante> estudiantesEvaluados = (List<Estudiante>) q.getResultList();
+		em.close();
+		
+		return estudiantesEvaluados;	
+	}
+	
+	/**
+	 * Buscar los registros no introducidos en valoracionmateria según el profesor, estudiante y nota
+	 * que se pasen como parámetros
+	 * @param prof
+	 * @param mat
+	 * @param nota
+	 * @return
+	 */
+	public List<Estudiante> findMateriasNoEvaluadas (Materia mat, Profesor prof, int nota) {
+			
+		EntityManager em = factory.createEntityManager();	
+		Query q = em.createNativeQuery("SELECT * from centroeducativo.estudiante e where e.id not in(SELECT idEstudiante FROM centroeducativo.valoracionmateria where idProfesor = ? and idMateria = ? and valoracion = ?);", Estudiante.class);
+		//Añadir los parámetros a la consulta
+		q.setParameter(1, prof.getId());
+		q.setParameter(2, mat.getId());
+		q.setParameter(3, nota);
+		//Guardar los registros en una lista
+		List<Estudiante> estudiantesNoEvaluados = (List<Estudiante>) q.getResultList();
+		em.close();
+		
+		return estudiantesNoEvaluados;
+	}
 
 }
