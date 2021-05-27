@@ -374,7 +374,7 @@ public class Panel2ValoracionEstudiantes extends JPanel {
 			this.listModelSelected.addElement(this.listModelNoSelected.getElementAt(this.jListNoSelected.getSelectedIndices()[i]));
 		}
 		//Al quitarlos de la lista de evaluados debemos comenzar desde la última e ir haciendo el 
-		 //barrido hasta la primera.
+		//barrido hasta la primera.
 		for (int i = this.jListNoSelected.getSelectedIndices().length - 1; i >= 0; i--) {
 			this.listModelNoSelected.removeElementAt(this.jListNoSelected.getSelectedIndices()[i]);
 		}
